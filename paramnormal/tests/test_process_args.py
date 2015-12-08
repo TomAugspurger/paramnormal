@@ -1,4 +1,4 @@
-import numpy as np
+import numpy
 
 import nose.tools as nt
 from numpy.random import seed
@@ -28,7 +28,7 @@ def test_normal():
 def test_lognormal():
     nt.assert_dict_equal(
         process_args.lognormal(mu=2, sigma=2.45),
-        dict(scale=np.exp(2), s=2.45, loc=0)
+        dict(scale=numpy.exp(2), s=2.45, loc=0)
     )
 
 
