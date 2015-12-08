@@ -32,6 +32,11 @@ def test_lognormal():
     )
 
 
+@nt.raises(ValueError)
+def test_lognormal_no_offset():
+    process_args.lognormal(offset=None)
+
+
 def test_beta():
     nt.assert_dict_equal(
         process_args.beta(alpha=2, beta=5),
