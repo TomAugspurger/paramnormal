@@ -2,17 +2,19 @@ from functools import wraps
 
 import numpy
 
-def uniform(low=None, high=None):
+
+def uniform(low=None, high=None, width=None):
     params = {}
     if low is not None:
         params['loc'] = low
 
     if high is not None:
-        if low is None:
-            raise ValueError('uniform requires both low and high params')
+        if low is None and width is None:
+            raise ValueError('`uniform` requires both low and high params.')
         else:
             params['scale'] = high - low
-
+    else:
+        params['scale'] = width
 
     return params
 

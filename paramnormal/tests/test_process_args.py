@@ -7,11 +7,19 @@ import numpy.testing as nptest
 from paramnormal import process_args
 
 
-def test_uniform():
+def test_uniform_high_low():
     nt.assert_dict_equal(
         process_args.uniform(low=4, high=9),
         dict(loc=4, scale=5)
     )
+
+
+def test_uniform_width_low():
+    nt.assert_dict_equal(
+        process_args.uniform(low=4, width=9),
+        dict(loc=4, scale=9)
+    )
+
 
 @nt.raises(ValueError)
 def test_uniform_no_low():
