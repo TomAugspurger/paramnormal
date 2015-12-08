@@ -21,6 +21,10 @@ _docstring = """\
         Collection of parameters that define the distribution in a
         manner consistent with ``paramnormal``.
 
+    See also
+    --------
+    paramnormal.{}
+
 """
 
 
@@ -44,7 +48,7 @@ def _fit(scipyname, data, pnormname=None, **guesses):
 
 def uniform(data, **guesses):
     """ Fit a uniform distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('uniform', data, **guesses)
     template = namedtuple('params', ['low', 'high'])
@@ -53,7 +57,7 @@ def uniform(data, **guesses):
 
 def normal(data, **guesses):
     """ Fit a normal distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('norm', data, pnormname='normal', **guesses)
     template = namedtuple('params', ['mu', 'sigma'])
@@ -62,7 +66,7 @@ def normal(data, **guesses):
 
 def lognormal(data, **guesses):
     """ Fit a lognormal distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params =  _fit('lognorm', data, pnormname='lognormal', **guesses)
     template = namedtuple('params', ['mu', 'sigma', 'offset'])
@@ -71,7 +75,7 @@ def lognormal(data, **guesses):
 
 def beta(data, **guesses):
     """ Fit a beta distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('beta', data, **guesses)
     template = namedtuple('params', ['alpha', 'beta'])
@@ -80,7 +84,7 @@ def beta(data, **guesses):
 
 def chi_squared(data, **guesses):
     """ Fit a chi_squared distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('chi2', data, pnormname='chi_squared',**guesses)
     template = namedtuple('params', ['k'])
@@ -89,7 +93,7 @@ def chi_squared(data, **guesses):
 
 def pareto(data, **guesses):
     """ Fit a pareto distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('pareto', data, **guesses)
     template = namedtuple('params', ['alpha'])
@@ -98,9 +102,18 @@ def pareto(data, **guesses):
 
 def gamma(data, **guesses):
     """ Fit a gamma distribution to data.
-    {}""".format(_docstring)
+    {}"""
 
     params = _fit('gamma', data, **guesses)
     template = namedtuple('params', ['k', 'theta'])
     return template(*params)
 
+
+
+functions = [
+    uniform, normal, lognormal, beta,
+    chi_squared, pareto, gamma,
+]
+
+for f in functions:
+    f.__doc__ = f.__doc__.format(_docstring.format(f.__name__))
