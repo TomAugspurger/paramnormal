@@ -1,5 +1,6 @@
-import numpy as np
+from functools import wraps
 
+import numpy
 
 def uniform(low=None, high=None):
     params = {}
@@ -21,7 +22,9 @@ def normal(mu=None, sigma=None):
 
 
 def lognormal(mu=None, sigma=None, offset=0):
-    return {'s': sigma, 'scale': np.exp(mu) if mu is not None else mu, 'loc': offset}
+    if offset is None:
+        raise ValueError("`offset` parameter is required. Recommended value is 0.")
+    return {'s': sigma, 'scale': numpy.exp(mu) if mu is not None else mu, 'loc': offset}
 
 
 def beta(alpha=None, beta=None):
